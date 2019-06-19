@@ -12,13 +12,15 @@ import java.util.List;
 @Table(name = "student")
 public class Student
 {
-    @ApiModelProperty(name = "studid", value = "Primary key for Student", required = true, example = "1")
+    @ApiModelProperty(name = "studid", value = "Primary Key of Student", required = true, example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long studid;
 
+    @ApiModelProperty(name = "studname", value = "Student Name", required = false, example = "Some Name")
     private String studname;
 
+    @ApiModelProperty(name = "courses", value = "List of Courses", required = false, example = "Array of Course objects")
     @ManyToMany
     @JoinTable(name = "studcourses",
             joinColumns = {@JoinColumn(name = "studid")},

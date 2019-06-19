@@ -34,6 +34,14 @@ public class StudentServiceImpl implements StudentService
     }
 
     @Override
+    public List<Student> findStudentByNameLike(String name, Pageable pageable)
+    {
+        List<Student> list = new ArrayList<>();
+        studrepos.findByStudnameContainingIgnoreCase(name, pageable).iterator().forEachRemaining(list::add);
+        return list;
+    }
+
+    @Override
     public void delete(long id) throws EntityNotFoundException
     {
         if (studrepos.findById(id).isPresent())
@@ -68,13 +76,5 @@ public class StudentServiceImpl implements StudentService
         }
 
         return studrepos.save(currentStudent);
-    }
-
-    @Override
-    public List<Student> findStudentByNameLike(String name, Pageable pageable)
-    {
-        List<Student> list = new ArrayList<>();
-        studrepos.findByStudnameContainingIgnoreCase(name, pageable).iterator().forEachRemaining(list::add);
-        return list;
     }
 }
